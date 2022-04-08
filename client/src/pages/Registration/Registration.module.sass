@@ -1,0 +1,25 @@
+@import "../../styles/_vars"
+
+.registration
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+.form
+    grid-template-columns: minmax(260px, 350px)
+    display: grid
+    grid-template-rows: repeat(3, 1fr)
+    gap: 20px 0
+
+.header
+    text-align: center
+    margin-bottom: 20px
+
+.text
+    margin-top: 10px
+    color: $textColor
+    font-size: 13px
+    & a
+        color: $green
+        text-decoration: underline

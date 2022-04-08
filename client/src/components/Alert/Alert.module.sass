@@ -1,0 +1,39 @@
+@import "../../styles/_vars"
+
+.alert
+    display: grid
+    grid-template-columns: 1fr auto
+    align-items: flex-start
+    gap: 0 20px
+    max-width: 570px
+    padding: 10px
+    border-radius: 6px
+    position: absolute
+    top: 20px
+    transition: background-color .2s ease
+    right: 20px
+
+.close
+    cursor: pointer
+    font-size: 14px
+    user-select: none
+
+.error
+    background-color: $alertOpacityRed
+    border: 1px solid $alertRed
+    & .title
+        color: $alertRed
+
+.success
+    background-color: $alertOpacityGreen
+    border: 1px solid $alertGreen
+    & .title
+        color: $alertGreen
+
+.title
+    font-size: 18px
+    font-weight: 600
+
+.description
+    font-size: 14px
+    line-height: 22px
