@@ -1,10 +1,12 @@
 import About from "pages/About/About";
+import Admin from "pages/Admin/Admin";
 import Home from "pages/Home/Home";
+import Product from "pages/Product/Product";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 
-const useRoutes = (isAuth: boolean = false) => {
+const useRoutes = (isAuth: boolean = false, admin:boolean = false) => {
     if (!isAuth) {
         return (
             <Switch>
@@ -19,6 +21,8 @@ const useRoutes = (isAuth: boolean = false) => {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
+            <Route path="/product/:id" component={Product} />
+            {admin && <Route exact path="/admin" component={Admin} />}
             <Redirect to="/" />
         </Switch>
     )

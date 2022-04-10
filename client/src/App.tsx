@@ -8,13 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { setUserRed } from "redux/actions/user.actions";
+import { setProductsRed } from "redux/actions/product.actions";
 
 const App = () => {
-    const isAuth = useSelector((state:any) => state.user.isAuth);
-    const routes = useRoutes(isAuth);
+    const { isAuth, infoUser: { role } } = useSelector((state:any) => state.user);
+    const routes = useRoutes(isAuth, role === "ADMIN");
     const dispatch = useDispatch();
 
     React.useEffect(() => {
+        // check auth
         axios({
             method: "GET",
             url: "http://localhost:5000/api/user/auth",
@@ -26,6 +28,15 @@ const App = () => {
                 Cookies.set("token", response.data.token);
                 dispatch(setUserRed(response.data.infoUser));
             });
+
+        // get products
+        // axios({
+        //     method: "GET",
+        //     url: "http://localhost:5000/api/device"
+        // })
+        //     .then((response) => {
+        //         dispatch(setProductsRed(response.data.devices));
+        //     })
         // eslint-disable-next-line
     }, []);
 

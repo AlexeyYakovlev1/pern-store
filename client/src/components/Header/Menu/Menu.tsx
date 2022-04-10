@@ -11,6 +11,10 @@ interface IMenuProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,HT
 const Menu = ({ menuList, className, ...props }: IMenuProps) => {
     const location = useLocation();
 
+    const logout = () => {
+        console.log('logout')
+    }
+
     return (
         <nav
             className={cn(classes.menu, className)}
@@ -20,12 +24,13 @@ const Menu = ({ menuList, className, ...props }: IMenuProps) => {
                 {menuList.map(item => {
                     return (
                         <li
+                            onClick={() => item.name === "Выйти" && logout()}
                             key={item.link}
                             className={cn(classes.item, {
                                 [classes.activeLink]: location.pathname === item.link
                             })}
                         > 
-                            <NavLink to={item.link}>{item.name}</NavLink>
+                            {item.link ? <NavLink to={item.link}>{item.name}</NavLink> : <span>{item.name}</span>}
                         </li>
                     )
                 })}

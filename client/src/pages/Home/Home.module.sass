@@ -1,0 +1,23 @@
+.home
+    display: grid
+    grid-template-columns: minmax(150px, 200px) minmax(200px, 900px)
+    gap: 15px
+    justify-content: space-between
+
+.type
+    position: sticky
+    top: 10px
+    & ul
+        gap: 10px
+
+.products
+    display: grid
+    grid-template-rows: auto, 1fr
+    gap: 25px
+
+.brands ul
+    display: grid
+    grid-template-columns: repeat(auto-fill, 120px)
+    justify-content: space-between
+    position: sticky
+    top: 10px

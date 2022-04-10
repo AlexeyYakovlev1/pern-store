@@ -50,7 +50,7 @@ class DeviceController {
         if (brandId && typeId)
             devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
 
-        return res.status(200).json({ devices });
+        return res.status(200).json({ devices: devices.rows });
     }
 
     async delete(req, res) {

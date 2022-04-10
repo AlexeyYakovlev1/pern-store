@@ -1,13 +1,19 @@
 import MainLayout from "components/layouts/MainLayout/MainLayout";
-import React from 'react';
 import classes from "./Home.module.sass";
 import cn from "classnames";
+import List from "components/Products/List";
+import Type from "components/Filter/Type/Type";
+import Brand from "components/Filter/Brand/Brand";
 
 const Home = () => {
     return (
         <MainLayout>
             <div className={cn(classes.home, "container")}>
-                <h1>Home page</h1>
+                <Type className={classes.type} />
+                <div className={classes.products}>
+                    <Brand className={classes.brands} />
+                    <List />
+                </div>
             </div>
         </MainLayout>
     )
