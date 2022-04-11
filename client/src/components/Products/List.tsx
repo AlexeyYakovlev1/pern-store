@@ -9,7 +9,7 @@ const List = () => {
     
     return (
         <ul className={classes.list}>
-            {products.map((product:IProduct) => {
+            {products.length ? products.map((product:IProduct) => {
                 return (
                     <Suspense
                         key={product.id}
@@ -18,7 +18,7 @@ const List = () => {
                         <Item  {...product} />
                     </Suspense>
                 )
-            })}
+            }) : <span>Продуктов не найдено...</span>}
         </ul>
     )
 }

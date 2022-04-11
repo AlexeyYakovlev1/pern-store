@@ -1,6 +1,7 @@
 @import "../../styles/_vars"
 
 .alert
+    z-index: 99999
     display: grid
     grid-template-columns: 1fr auto
     align-items: flex-start
@@ -8,7 +9,7 @@
     max-width: 570px
     padding: 10px
     border-radius: 6px
-    position: absolute
+    position: fixed
     top: 20px
     transition: background-color .2s ease
     right: 20px

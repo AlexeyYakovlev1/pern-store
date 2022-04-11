@@ -5,7 +5,7 @@ class BrandController {
         const { name } = req.body;
         const newBrand = await Brand.create({ name });
 
-        return res.json({ newBrand });
+        return res.json({ newBrand, message: "Брэнд был создан" });
     }
 
     async delete(req, res) {

@@ -30,13 +30,13 @@ const App = () => {
             });
 
         // get products
-        // axios({
-        //     method: "GET",
-        //     url: "http://localhost:5000/api/device"
-        // })
-        //     .then((response) => {
-        //         dispatch(setProductsRed(response.data.devices));
-        //     })
+        axios({
+            method: "GET",
+            url: "http://localhost:5000/api/device"
+        })
+            .then((response) => {
+                dispatch(setProductsRed(response.data.devices));
+            })
         // eslint-disable-next-line
     }, []);
 

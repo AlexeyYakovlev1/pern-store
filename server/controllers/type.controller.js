@@ -5,7 +5,7 @@ class TypeController {
         const { name } = req.body;
         const newType = await Type.create({ name });
 
-        return res.json({ newType })
+        return res.json({ newType, message: "Тип был добавлен" })
     } 
 
     async get(req, res) {

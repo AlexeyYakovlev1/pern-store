@@ -6,6 +6,7 @@ export interface IProduct {
     brandId: number;
     typeId: number;
     rating: number;
+    info: IInfoProduct[];
 }
 
 export interface IInfoProduct {

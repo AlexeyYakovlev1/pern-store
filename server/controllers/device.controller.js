@@ -6,7 +6,7 @@ const path = require("path");
 class DeviceController {
     async create(req, res, next) {
         try {
-            const { name, price, brandId, typeId, info } = req.body;
+            let { name, price, brandId, typeId, info } = req.body;
             const { img } = req.files;
             const fileName = uuid.v4() + ".jpg";
             
@@ -26,7 +26,7 @@ class DeviceController {
                 })
             }
 
-            return res.json({ newDevice });
+            return res.json({ newDevice, message: "Продукт был добавлен" });
         } catch(e) {
             next(ApiError.badRequest(e.message));
         }
