@@ -15,3 +15,10 @@ export interface IInfoProduct {
     description: string;
     deviceId: number;
 }
+
+export interface IBasketProduct {
+    id: number;
+    basketId: number;
+    deviceId: number;
+    createdAt: Date;
+}

@@ -1,0 +1,28 @@
+@import "../../styles/_vars"
+
+.pages
+    margin-top: 10px
+
+.list
+    display: flex
+    align-items: center
+
+.item
+    cursor: pointer
+    border-bottom: 1px solid $green
+    border-top: 1px solid $green
+    border-right: 1px solid $green
+    width: 35px
+    height: 35px
+    display: flex
+    align-items: center
+    justify-content: center
+    transition: all .2s ease
+    &:first-child
+        border-left: 1px solid $green
+    &:hover
+        color: #fff
+        background-color: $greenHover
+    &Active
+        color: #fff
+        background-color: $greenHover

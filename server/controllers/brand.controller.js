@@ -10,6 +10,7 @@ class BrandController {
 
     async delete(req, res) {
         const { id } = req.params;
+        
         await Brand.destroy({ where: { id } });
 
         res.status(200).json({ message: "Брэнд был удален" });

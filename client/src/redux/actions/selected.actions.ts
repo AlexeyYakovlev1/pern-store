@@ -1,15 +1,15 @@
 import { IActionSelected } from "interfaces/action.interface"
 
-export const selectedType = (name: string): IActionSelected => {
+export const selectedType = (id: number): IActionSelected => {
     return {
         type: "SELECTED_TYPE",
-        payload: name
+        payload: id
     }
 }
 
-export const selectedBrand = (name: string): IActionSelected => {
+export const selectedBrand = (id: number): IActionSelected => {
     return {
         type: "SELECTED_BRAND",
-        payload: name
+        payload: id
     }
 }

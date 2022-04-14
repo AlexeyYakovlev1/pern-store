@@ -1,14 +1,18 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import classes from "./Header.module.sass";
 import cn from "classnames";
 import Menu from "./Menu/Menu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "redux/actions/user.actions";
+import Cookies from "js-cookie";
 
 interface IHeaderProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 const Header = ({ className, ...props }:IHeaderProps) => {
+    const history = useHistory();
     const userRole = useSelector((state:any) => state.user.infoUser.role);
+    const dispatch = useDispatch();
     const menuList = [
         {
             name: "Главная",
@@ -23,19 +27,20 @@ const Header = ({ className, ...props }:IHeaderProps) => {
         {
             name: "Корзина",
             link: "/basket"
-        },
-        {
-            name: "Выйти"
         }
     ];
-    
+
     if (userRole === "ADMIN") {
-        const obj = {
+        menuListUser.unshift({
             name: "Админ",
             link: "/admin"
-        };
+        })
+    }
 
-        menuListUser.unshift(obj)
+    const logoutHandler = () => {
+        history.push("/login");
+        dispatch(logOut({}));
+        Cookies.set("token", "");
     }
 
     return (
@@ -51,6 +56,12 @@ const Header = ({ className, ...props }:IHeaderProps) => {
             <div className={classes.menu}>
                 <Menu menuList={menuList} />
                 <Menu menuList={menuListUser} className={classes.user} />
+                <span
+                    onClick={logoutHandler}
+                    className={cn(classes.item)}
+                >
+                    Выйти
+                </span>
             </div>
         </header>
     )

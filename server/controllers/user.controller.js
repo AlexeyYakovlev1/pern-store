@@ -79,6 +79,7 @@ class UserController {
         const { id } = req.params;
         
         await User.destroy({ where: { id } });
+        await Basket.destroy({ where: { userId: id } });
 
         res.status(200).json({ message: "Пользователь был удален" });
     }

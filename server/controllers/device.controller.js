@@ -33,16 +33,16 @@ class DeviceController {
     }
 
     async get(req, res) {
-        let { brandId, typeId, limit, page } = req.query;
-        
+        let { typeId, brandId, page, limit } = req.query;
+
         limit = limit || 9;
         page = page || 1;
-        
+    
         let devices = null;
         let offset = limit * page - limit;
     
-        if (!brandId && !typeId) 
-            devices = await Device.findAndCountAll({ limit, offset }); // findAndCountAll for pagination
+        if (!brandId && !typeId)
+            devices = await Device.findAndCountAll({ limit, offset });
         if (brandId && !typeId)
             devices = await Device.findAndCountAll({ where: { brandId } }, limit, offset);
         if (!brandId && typeId)
@@ -50,7 +50,7 @@ class DeviceController {
         if (brandId && typeId)
             devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
 
-        return res.status(200).json({ devices: devices.rows });
+        return res.status(200).json({ devices });
     }
 
     async delete(req, res) {

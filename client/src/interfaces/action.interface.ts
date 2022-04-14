@@ -14,5 +14,13 @@ export interface IActionProducts extends IActionType {
 }
 
 export interface IActionSelected extends IActionType {
-    payload: string;
+    payload: number;
+}
+
+export interface IActionPagination extends IActionType {
+    payload: number;
+}
+
+export interface IActionBasket extends IActionType {
+    payload: IProduct | IProduct[];
 }

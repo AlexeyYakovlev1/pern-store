@@ -4,6 +4,7 @@ import cn from "classnames";
 import List from "components/Products/List";
 import Type from "components/Filter/Type/Type";
 import Brand from "components/Filter/Brand/Brand";
+import Pages from "components/Pages/Pages";
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
                 <div className={classes.products}>
                     <Brand className={classes.brands} />
                     <List />
+                    <Pages />
                 </div>
             </div>
         </MainLayout>

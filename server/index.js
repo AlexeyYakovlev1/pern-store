@@ -6,7 +6,9 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 
 const sequalize = require("./db");
-const models = require("./models/models");
+
+require("./models/models");
+
 const errorMiddleware = require("./middleware/ErrorHandling.middleware");
 
 const app = express();

@@ -10,7 +10,7 @@ export function setUserRed(user: IUser): IActionUser {
 
 export function logOut(user: {}): IActionUser {
     return {
-        type: "SET_USER",
+        type: "LOG_OUT",
         payload: user
     }
 }

@@ -1,11 +1,56 @@
+import axios from "axios";
 import Button from "components/UI/button/Button";
+import { AlertContext } from "context/AlertContext";
 import usePrice from "hooks/usePrice";
-import { IProduct } from "interfaces/product.interface";
+import { IBasketProduct, IProduct } from "interfaces/product.interface";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { addProductToBasket } from "redux/actions/basket.actions";
 import classes from "./Item.module.sass";
+import Cookies from "js-cookie";
 
 const Item = (props: IProduct) => {
     const price = usePrice(props.price);
+    const dispatch = useDispatch();
+    const { setAlert } = React.useContext(AlertContext);
+    const basket = useSelector((state:any) => state.basket.list);
+    const [basketDevice, setBasketDevice] = React.useState(false);
+
+    React.useEffect(() => {
+        basket.forEach((item:IBasketProduct) => {
+            if (item.deviceId === props.id) {
+                setBasketDevice(true);
+            }
+        });
+
+        // eslint-disable-next-line
+    }, [basket]);
+
+    const addToBasketHandler = (currentId:number) => {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/api/basket/add",
+            data: { productId: currentId },
+            headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`
+            }
+        })
+            .then((response) => {
+                dispatch(addProductToBasket(response.data.device));
+                setBasketDevice(true);
+                setAlert({
+                    type: "success",
+                    message: response.data.message
+                })
+            })
+            .catch((error) => {
+                setAlert({
+                    type: "error",
+                    message: error.message
+                })
+            })
+    }
 
     return (
         <li className={classes.item}>
@@ -20,9 +65,13 @@ const Item = (props: IProduct) => {
             <div className={classes.body}>
                 <span className={classes.price}>{price}</span>
             </div>
-            <Button>Добавить в корзину</Button>
+            <Button
+                onClick={() => addToBasketHandler(props.id)}
+            >
+                {!basketDevice ? <span>Добавить в корзину</span> : <NavLink to={`/basket`}>Смотреть в корзине</NavLink>}
+            </Button>
         </li>
     )
 }
 
-export default Item
+export default Item;

@@ -26,7 +26,8 @@ const Registration = () => {
             .then((response:any) => {
                 setAlert({ message: response.data.message, type: "success" })
                 history.push("/login");
-            }).catch((error) => setAlert({ message: error.message, type: "error" }));
+            })
+            .catch((error) => setAlert({ message: error.message, type: "error" }));
     };
 
     return (
