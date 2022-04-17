@@ -7,24 +7,29 @@ const SET_BASKET = "SET_BASKET";
 
 interface IDefaultState {
     list: IProduct[];
+    totalPrice: number;
 }
 
 const defaultState: IDefaultState = {
-    list: []
+    list: [],
+    totalPrice: 0
 }
 
 export default function basket(state = defaultState, action: IActionBasket) {
     switch (action.type) {
         case ADD_PRODUCT_TO_BASKET:
             if (!Array.isArray(action.payload)) {
-                state.list.unshift(action.payload)
+                state.list.unshift(action.payload);
+                state.totalPrice += action.payload.price;
             }
 
             return { ...state };
         case REMOVE_PRODUCT_FROM_BASKET:
             if (!Array.isArray(action.payload)) {
                 let currentProductId = null;
-                console.log(action.payload)
+
+                state.totalPrice -= action.payload.price;
+
                 currentProductId = state.list.findIndex((item: IProduct) => {
                     const payload: any = action.payload;
 
@@ -36,6 +41,12 @@ export default function basket(state = defaultState, action: IActionBasket) {
 
             return { ...state };
         case SET_BASKET:
+            if (Array.isArray(action.payload)) {
+                for (let i = 0; i < action.payload.length; i++) {
+                    state.totalPrice += action.payload[i].price;
+                }
+            }
+
             return { ...state, list: state.list.concat(action.payload) };
         default: {
             return state;

@@ -2,10 +2,13 @@
 
 .product
     display: grid
-    grid-template-columns: minmax(270px, 500px) 1fr
-    align-items: flex-start
-    gap: 50px
-    justify-content: space-between
+    grid-template-rows: auto 1fr
+    &Top
+        display: grid
+        grid-template-columns: minmax(270px, 500px) 1fr
+        align-items: flex-start
+        gap: 50px
+        justify-content: space-between
 
 .rating
     display: flex
@@ -22,12 +25,9 @@
     display: grid
     grid-template-rows: auto 1fr
     gap: 20px
-    &Header
-        display: grid
-        grid-template-rows: repeat(4, auto)
-        gap: 10px
     &Body
-        max-width: 270px
+        max-width: 300px
+        margin-top: 20px
         &Title
             margin-bottom: 20px
         &List

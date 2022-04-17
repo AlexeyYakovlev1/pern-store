@@ -25,3 +25,13 @@
 .price
     font-weight: 600
     font-size: 22px
+
+.actions
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(120px, 350px))
+    gap: 20px
+
+.removeButton
+    background-color: $alertRed
+    &:hover
+        background-color: $alertOpacityRed

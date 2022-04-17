@@ -47,7 +47,7 @@ const Header = ({ className, ...props }:IHeaderProps) => {
         >
             <div className={classes.logo}>
                 <NavLink to="/">
-                    <h1 className={classes.logoText}>Онлайн Магазин Pern</h1>
+                    <h1 className={classes.logoText}>Pern</h1>
                 </NavLink>
             </div>
             <div className={classes.menu}>

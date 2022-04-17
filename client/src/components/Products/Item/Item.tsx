@@ -1,6 +1,5 @@
 import axios from "axios";
 import Button from "components/UI/button/Button";
-import { AlertContext } from "context/AlertContext";
 import usePrice from "hooks/usePrice";
 import { IBasketProduct, IProduct } from "interfaces/product.interface";
 import React from "react";
@@ -13,7 +12,6 @@ import Cookies from "js-cookie";
 const Item = (props: IProduct) => {
     const price = usePrice(props.price);
     const dispatch = useDispatch();
-    const { setAlert } = React.useContext(AlertContext);
     const basket = useSelector((state:any) => state.basket.list);
     const [basketDevice, setBasketDevice] = React.useState(false);
 
@@ -37,16 +35,6 @@ const Item = (props: IProduct) => {
             .then((response) => {
                 dispatch(addProductToBasket(response.data.device));
                 setBasketDevice(true);
-                setAlert({
-                    type: "success",
-                    message: response.data.message
-                })
-            })
-            .catch((error) => {
-                setAlert({
-                    type: "error",
-                    message: error.message
-                })
             })
     }
 
@@ -62,16 +50,6 @@ const Item = (props: IProduct) => {
             .then((response) => {
                 dispatch(removeProductFromBasket(props));
                 setBasketDevice(false);
-                setAlert({
-                    type: "success",
-                    message: response.data.message
-                })
-            })
-            .catch((error) => {
-                setAlert({
-                    type: "error",
-                    message: error.message
-                })
             })
     }
 
