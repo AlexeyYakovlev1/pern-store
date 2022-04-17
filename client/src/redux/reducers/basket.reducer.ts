@@ -6,7 +6,7 @@ const REMOVE_PRODUCT_FROM_BASKET = "REMOVE_PRODUCT_FROM_BASKET";
 const SET_BASKET = "SET_BASKET";
 
 interface IDefaultState {
-    list: IProduct[]
+    list: IProduct[];
 }
 
 const defaultState: IDefaultState = {
@@ -23,15 +23,20 @@ export default function basket(state = defaultState, action: IActionBasket) {
             return { ...state };
         case REMOVE_PRODUCT_FROM_BASKET:
             if (!Array.isArray(action.payload)) {
-                state.list.splice(1, action.payload.id)
+                let currentProductId = null;
+                console.log(action.payload)
+                currentProductId = state.list.findIndex((item: IProduct) => {
+                    const payload: any = action.payload;
+
+                    return item.id === payload.id;
+                })
+
+                state.list.splice(currentProductId, 1);
             }
 
             return { ...state };
         case SET_BASKET:
-            return {
-                ...state,
-                list: state.list.concat(action.payload)
-            }
+            return { ...state, list: state.list.concat(action.payload) };
         default: {
             return state;
         }

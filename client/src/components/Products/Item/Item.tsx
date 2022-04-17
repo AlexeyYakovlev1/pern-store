@@ -6,7 +6,7 @@ import { IBasketProduct, IProduct } from "interfaces/product.interface";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { addProductToBasket } from "redux/actions/basket.actions";
+import { addProductToBasket, removeProductFromBasket } from "redux/actions/basket.actions";
 import classes from "./Item.module.sass";
 import Cookies from "js-cookie";
 
@@ -19,9 +19,7 @@ const Item = (props: IProduct) => {
 
     React.useEffect(() => {
         basket.forEach((item:IBasketProduct) => {
-            if (item.deviceId === props.id) {
-                setBasketDevice(true);
-            }
+            if (item.id === props.id) setBasketDevice(true);
         });
 
         // eslint-disable-next-line
@@ -52,6 +50,31 @@ const Item = (props: IProduct) => {
             })
     }
 
+    const removeFromBasketHandler = (currentId:number) => {
+        axios({
+            method: "DELETE",
+            url: "http://localhost:5000/api/basket/remove",
+            data: { productId: currentId },
+            headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`
+            }
+        })
+            .then((response) => {
+                dispatch(removeProductFromBasket(props));
+                setBasketDevice(false);
+                setAlert({
+                    type: "success",
+                    message: response.data.message
+                })
+            })
+            .catch((error) => {
+                setAlert({
+                    type: "error",
+                    message: error.message
+                })
+            })
+    }
+
     return (
         <li className={classes.item}>
             <div className={classes.header}>
@@ -65,11 +88,20 @@ const Item = (props: IProduct) => {
             <div className={classes.body}>
                 <span className={classes.price}>{price}</span>
             </div>
-            <Button
-                onClick={() => addToBasketHandler(props.id)}
-            >
-                {!basketDevice ? <span>Добавить в корзину</span> : <NavLink to={`/basket`}>Смотреть в корзине</NavLink>}
-            </Button>
+            {!basketDevice
+                ?
+                <Button
+                    onClick={() => addToBasketHandler(props.id)}
+                >
+                    <span>Добавить в корзину</span>
+                </Button>
+                :
+                <Button
+                    onClick={() => removeFromBasketHandler(props.id)}
+                >
+                    <span>Удалить из корзины</span>
+                </Button>
+            }
         </li>
     )
 }

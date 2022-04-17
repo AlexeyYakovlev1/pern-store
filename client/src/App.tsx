@@ -27,7 +27,7 @@ const App = () => {
             dispatch(setUserRed(response.infoUser));
         });
 
-        getProducts(null, null, 1, 2).then((response) => {
+        getProducts(null, null, 1, 4).then((response) => {
             dispatch(setProductsRed(response.devices.rows));
             dispatch(setTotalCount(response.devices.count));
         })

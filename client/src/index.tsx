@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from "react-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -15,12 +14,11 @@ declare global {
 }
 
 const store = createStore(allReducers, composeWithDevTools(applyMiddleware(thunk)));
+const container:any = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>,
-  document.getElementById('root')
+root.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
 );

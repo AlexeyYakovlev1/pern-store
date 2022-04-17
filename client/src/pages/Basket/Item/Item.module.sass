@@ -1,0 +1,27 @@
+@import "../../../styles/_vars"
+
+.item
+    display: grid
+    grid-template-columns: auto 1fr
+    gap: 20px
+    align-items: center
+    margin-bottom: 20px
+    padding-bottom: 10px
+    &:not(:last-child)
+        border-bottom: 1px solid $greenHover
+
+.photo
+    max-width: 250px
+
+.info
+    &Header
+        margin-bottom: 20px
+
+.name
+    margin-bottom: 10px
+    &:hover
+        text-decoration: underline
+
+.price
+    font-weight: 600
+    font-size: 22px
