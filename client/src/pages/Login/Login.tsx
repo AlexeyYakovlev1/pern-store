@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AlertContext } from "context/AlertContext";
 import React from 'react';
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "../../components/UI/button/Button";
 import Input from "../../components/UI/input/Input";
 import Title from "../../components/UI/Title/Title";
@@ -14,7 +14,6 @@ import { setUserRed } from "redux/actions/user.actions";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { setAlert } = React.useContext(AlertContext);
     const [user, setUser] = React.useState<IUser>({
         email: "", password: "", role: "", id: -1, createdAt: new Date()
@@ -34,8 +33,8 @@ const Login = () => {
             })
                 .then((response) => {
                     Cookies.set("token", response.data.token);
-                    history.push("/");
                     dispatch(setUserRed(user));
+                    window.location.reload();
                 })
                 .catch((err) => {
                     setAlert({

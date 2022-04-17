@@ -34,22 +34,23 @@ class DeviceController {
 
     async get(req, res) {
         let { typeId, brandId, page, limit } = req.query;
-
+        
         limit = limit || 9;
         page = page || 1;
-    
-        let devices = null;
-        let offset = limit * page - limit;
-    
-        if (!brandId && !typeId)
-            devices = await Device.findAndCountAll({ limit, offset });
-        if (brandId && !typeId)
-            devices = await Device.findAndCountAll({ where: { brandId } }, limit, offset);
-        if (!brandId && typeId)
-            devices = await Device.findAndCountAll({ where: { typeId }, limit, offset });
-        if (brandId && typeId)
-            devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
 
+        let devices;
+        let offset = limit * page - limit;
+
+        if (!brandId && !typeId) {
+            devices = await Device.findAndCountAll({ limit, offset });
+        } else if (brandId && !typeId) {
+            devices = await Device.findAndCountAll({ where: { brandId } }, limit, offset);
+        } else if (!brandId && typeId) {
+            devices = await Device.findAndCountAll({ where: { typeId }, limit, offset });
+        } else if (brandId && typeId) {
+            devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
+        }
+        
         return res.status(200).json({ devices });
     }
 

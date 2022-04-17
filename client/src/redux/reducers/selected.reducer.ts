@@ -4,13 +4,13 @@ const SELECTED_TYPE = "SELECTED_TYPE";
 const SELECTED_BRAND = "SELECTED_BRAND";
 
 interface IDefaultState {
-    selectedType: number;
-    selectedBrand: number;
+    selectedType: number | null;
+    selectedBrand: number | null;
 }
 
 const defaultState: IDefaultState = {
-    selectedType: 0,
-    selectedBrand: 0
+    selectedType: null,
+    selectedBrand: null
 }
 
 export default function selected(state = defaultState, action: IActionSelected) {

@@ -27,13 +27,13 @@ const App = () => {
             dispatch(setUserRed(response.infoUser));
         });
 
-        getProducts(null, null, 1, 4).then((response) => {
-            dispatch(setProductsRed(response.devices.rows));
-            dispatch(setTotalCount(response.devices.count));
-        })
-
         getBasket().then((response) => {
             dispatch(setBasket(response.basket));
+        })
+
+        getProducts(null, null, page, 3).then((response) => {
+            dispatch(setProductsRed(response.devices.rows));
+            dispatch(setTotalCount(response.devices.count));
         })
         
         // eslint-disable-next-line

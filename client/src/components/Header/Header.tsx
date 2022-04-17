@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classes from "./Header.module.sass";
 import cn from "classnames";
 import Menu from "./Menu/Menu";
@@ -10,7 +10,6 @@ import Cookies from "js-cookie";
 interface IHeaderProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 const Header = ({ className, ...props }:IHeaderProps) => {
-    const history = useHistory();
     const userRole = useSelector((state:any) => state.user.infoUser.role);
     const dispatch = useDispatch();
     const menuList = [
@@ -23,12 +22,10 @@ const Header = ({ className, ...props }:IHeaderProps) => {
             link: "/about"
         }
     ];
-    const menuListUser = [
-        {
-            name: "Корзина",
-            link: "/basket"
-        }
-    ];
+    const menuListUser = [{
+        name: "Корзина",
+        link: "/basket"
+    }];
 
     if (userRole === "ADMIN") {
         menuListUser.unshift({
@@ -38,9 +35,9 @@ const Header = ({ className, ...props }:IHeaderProps) => {
     }
 
     const logoutHandler = () => {
-        history.push("/login");
         dispatch(logOut({}));
         Cookies.set("token", "");
+        window.location.reload();
     }
 
     return (

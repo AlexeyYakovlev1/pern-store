@@ -16,7 +16,7 @@ export default function products(state = initialState, action: IActionProducts) 
         case SET_PRODUCTS:
             return {
                 ...state,
-                list: state.list.concat(action.payload)
+                list: action.payload
             }
         default:
             return state;
